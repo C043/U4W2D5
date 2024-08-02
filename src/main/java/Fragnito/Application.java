@@ -37,5 +37,10 @@ public class Application {
             System.out.println("Nessun libro scritto dall'autore cercato è presente nella tua lista.");
         }
 
+/*
+        bookList.saveListOnDisk();
+*/
+        
+
     }
 }

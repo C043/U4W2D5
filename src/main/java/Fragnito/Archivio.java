@@ -1,5 +1,10 @@
 package Fragnito;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -50,5 +55,32 @@ public class Archivio {
             System.out.println("Risultati ricerca per autore: " + author);
             booksFound.forEach(System.out::println);
         } else System.out.println("Nessun libro scritto dall'autore cercato nella tua lista.");
+    }
+
+    public void saveListOnDisk() {
+        StringBuilder textToWrite = new StringBuilder();
+        File file = new File("src/bookList.txt");
+        this.bookList.forEach(book -> {
+            if (book instanceof Libro) {
+                textToWrite.append(book.getTitle()).append("@")
+                        .append(book.getIsbnCode()).append("@")
+                        .append(book.getYear()).append("@")
+                        .append(((Libro) book).getAuthor()).append("@")
+                        .append(((Libro) book).getGenre()).append("@")
+                        .append(book.getNumOfPages()).append("@").append("#");
+            } else if (book instanceof Rivista) {
+                textToWrite.append(book.getTitle()).append("@")
+                        .append(book.getIsbnCode()).append("@")
+                        .append(book.getYear()).append("@")
+                        .append(((Rivista) book).getPeriodicita()).append("@")
+                        .append(book.getNumOfPages()).append("@").append("#");
+            }
+        });
+
+        try {
+            FileUtils.write(file, textToWrite, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

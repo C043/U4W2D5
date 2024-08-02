@@ -12,11 +12,7 @@ public class Application {
         Random rand = new Random();
         Scanner scanner = new Scanner(System.in);
         Faker f = new Faker();
-        final int[] isbn = {1000};
-        Supplier<Integer> isbnGen = () -> {
-            isbn[0] = isbn[0] + 1;
-            return isbn[0];
-        };
+
 
         Archivio bookList = new Archivio();
 
@@ -28,6 +24,14 @@ public class Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        int lastIsbn = bookList.getLastIsbn();
+
+        final int[] isbn = {lastIsbn};
+        Supplier<Integer> isbnGen = () -> {
+            isbn[0] = isbn[0] + 1;
+            return isbn[0];
+        };
 
 
         System.out.println("Cosa vuoi fare?");

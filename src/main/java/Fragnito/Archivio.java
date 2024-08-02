@@ -131,6 +131,13 @@ public class Archivio {
         }
     }
 
+    public int getLastIsbn() {
+        OptionalInt lastOptionalIsbn = this.bookList.stream().mapToInt(Leggibile::getIsbnCode).max();
+        if (lastOptionalIsbn.isPresent()) {
+            return lastOptionalIsbn.getAsInt();
+        } else return 1000;
+    }
+
     public void printList() {
         if (this.bookList.isEmpty()) {
             System.out.println("Nessun libro da mostrare, aggiungine uno prima!");

@@ -2,30 +2,40 @@ package Fragnito;
 
 import com.github.javafaker.Faker;
 
+import java.util.NoSuchElementException;
+import java.util.function.Supplier;
+
 public class Application {
     public static void main(String[] args) {
-       /* Supplier<List<Libro>> randomBooks = () -> {
-            List<Libro> bookList = new ArrayList<>();
-            for (int i = 1; i <= 100; i++) {
-                bookList.add(new Libro(f.book().title(), f.harryPotter().character(), Genre.DRAMA));
-            }
-            return bookList;
-        };*/
         Faker f = new Faker();
+        final int[] isbn = {1000};
+        Supplier<Integer> isbnGen = () -> {
+            isbn[0] = isbn[0]++;
+            return isbn[0];
+        };
 
 
         Archivio bookList = new Archivio();
 
-        Libro cadavereSquisito = new Libro(f.book().title(), 100, 2024, f.elderScrolls().firstName() + " " + f.elderScrolls().lastName(), Genre.HORROR);
-        Libro readyPlayerOne = new Libro(f.book().title(), 101, 2020, f.harryPotter().character(), Genre.SCI_FI);
-        Libro comedyBook = new Libro(f.book().title(), 101, 2020, f.funnyName().name(), Genre.COMEDY);
+        Libro cadavereSquisito = new Libro(f.book().title(), isbnGen.get(), 2024, "Ernest Cline", Genre.HORROR);
+        Libro readyPlayerOne = new Libro(f.book().title(), isbnGen.get(), 2020, f.harryPotter().character(), Genre.SCI_FI);
+        Libro comedyBook = new Libro(f.book().title(), isbnGen.get(), 2020, f.funnyName().name(), Genre.COMEDY);
 
 
         bookList.addBook(cadavereSquisito);
         bookList.addBook(readyPlayerOne);
         bookList.addBook(comedyBook);
-        bookList.removeIsbn(1000);
-        bookList.isbnSearch(100);
+
+        bookList.removeIsbn(2000);
+
+        bookList.isbnSearch(1002);
+
         bookList.yearSearch(2020);
+        try {
+            bookList.authorSearch("Ernest Cline");
+        } catch (NoSuchElementException e) {
+            System.out.println("Nessun libro scritto dall'autore cercato è presente nella tua lista.");
+        }
+
     }
 }

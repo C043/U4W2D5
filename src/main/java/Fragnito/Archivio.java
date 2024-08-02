@@ -1,9 +1,6 @@
 package Fragnito;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Archivio {
@@ -40,6 +37,18 @@ public class Archivio {
             System.out.println("Risultati ricerca per anno:");
             System.out.println(year + " - " + booksFound.get(year));
         } else System.out.println("Nessun libro nella tua lista pubblicato quell'anno.");
+    }
 
+    public void authorSearch(String author) throws RuntimeException {
+        List<Leggibile> booksFound = this.bookList.stream().filter(book -> {
+            if (book instanceof Libro) {
+                return Objects.equals(((Libro) book).getAuthor(), author);
+            } else return false;
+        }).toList();
+
+        if (booksFound.getFirst() != null) {
+            System.out.println("Risultati ricerca per autore: " + author);
+            booksFound.forEach(System.out::println);
+        } else System.out.println("Nessun libro scritto dall'autore cercato nella tua lista.");
     }
 }

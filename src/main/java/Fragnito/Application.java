@@ -19,10 +19,7 @@ public class Application {
 
         bookList.addBook(cadavereSquisito);
         bookList.addBook(readyPlayerOne);
-        try {
-            bookList.removeIsbn(100);
-        } catch (NullPointerException e) {
-            System.out.println("Nessun libro trovato con quel codice!");
-        }
+        bookList.removeIsbn(1000);
+        bookList.isbnSearch(100);
     }
 }

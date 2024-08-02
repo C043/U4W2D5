@@ -21,6 +21,7 @@ public class Application {
         Archivio bookList = new Archivio();
 
         System.out.println("Benvenuto su GoodReads!");
+        System.out.println("\"" + f.harryPotter().quote() + "\"");
         System.out.println("Cosa vuoi fare?");
 
         int input = 100;
@@ -165,7 +166,7 @@ public class Application {
                     break;
                 }
                 default: {
-                    System.out.println("Torna presto!");
+                    System.out.println("See you space cowboy...");
                     break;
                 }
             }

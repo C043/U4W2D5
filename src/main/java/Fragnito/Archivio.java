@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Archivio {
     private final List<Leggibile> bookList = new ArrayList<>();
@@ -38,11 +37,15 @@ public class Archivio {
     }
 
     public void yearSearch(int year) {
-        Map<Integer, List<Leggibile>> booksFound = this.bookList.stream().filter(book -> book.getYear() == year).collect(Collectors.groupingBy(Leggibile::getYear));
-        if (!booksFound.get(year).isEmpty()) {
-            System.out.println("Risultati ricerca per anno:");
-            System.out.println(year + " - " + booksFound.get(year));
-        } else System.out.println("Nessun libro nella tua lista pubblicato quell'anno.");
+        List<Leggibile> booksFound = this.bookList.stream().filter(book -> book.getYear() == year).toList();
+        try {
+            if (booksFound.getFirst() != null) {
+                System.out.println("Risultati ricerca per anno:");
+                System.out.println(year + " - " + booksFound);
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Nessun libro nella tua lista pubblicato quell'anno.");
+        }
     }
 
     public void authorSearch(String author) {

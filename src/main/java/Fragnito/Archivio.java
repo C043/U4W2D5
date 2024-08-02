@@ -2,7 +2,9 @@ package Fragnito;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Archivio {
     private final List<Leggibile> bookList = new ArrayList<>();
@@ -30,5 +32,14 @@ public class Archivio {
             System.out.println("Libro trovato.");
             System.out.println(bookFound.get());
         } else System.out.println("Nessun libro con quel codice!");
+    }
+
+    public void yearSearch(int year) {
+        Map<Integer, List<Leggibile>> booksFound = this.bookList.stream().filter(book -> book.getYear() == year).collect(Collectors.groupingBy(Leggibile::getYear));
+        if (!booksFound.get(year).isEmpty()) {
+            System.out.println("Risultati ricerca per anno:");
+            System.out.println(year + " - " + booksFound.get(year));
+        } else System.out.println("Nessun libro nella tua lista pubblicato quell'anno.");
+
     }
 }

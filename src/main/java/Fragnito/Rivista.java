@@ -3,8 +3,8 @@ package Fragnito;
 public class Rivista extends Leggibile {
     private final Periodicita periodicita;
 
-    public Rivista(String title, int isbnCode, Periodicita periodicita) {
-        super(title, isbnCode);
+    public Rivista(String title, int isbnCode, int year, Periodicita periodicita) {
+        super(title, isbnCode, year);
         this.periodicita = periodicita;
     }
 

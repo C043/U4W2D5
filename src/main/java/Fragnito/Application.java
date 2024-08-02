@@ -164,6 +164,10 @@ public class Application {
                     }
                     break;
                 }
+                default: {
+                    System.out.println("Torna presto!");
+                    break;
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package Fragnito;
 
 import com.github.javafaker.Faker;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 
@@ -40,7 +41,12 @@ public class Application {
 /*
         bookList.saveListOnDisk();
 */
-        
+        bookList.printList();
+        try {
+            bookList.readListToApp("src/bookList.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

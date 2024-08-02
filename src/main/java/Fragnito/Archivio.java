@@ -79,8 +79,33 @@ public class Archivio {
 
         try {
             FileUtils.write(file, textToWrite, StandardCharsets.UTF_8);
+            System.out.println("Lista libri esportata con successo!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void readListToApp(String path) throws IOException {
+        File file = new File(path);
+        String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+        String[] booksToString = content.split("#");
+
+        for (String book : booksToString) {
+            String[] bookParts = book.split("@");
+            if (bookParts.length == 5) {
+                Rivista rivista = new Rivista(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), Periodicita.valueOf(bookParts[3]));
+                this.bookList.add(rivista);
+            } else if (bookParts.length == 6) {
+                Libro libro = new Libro(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), bookParts[3], Genre.valueOf(bookParts[4]));
+                this.bookList.add(libro);
+            }
+            System.out.println("Lista libri importata con successo!");
+        }
+        this.bookList.forEach(System.out::println);
+    }
+
+    public void printList() {
+        System.out.println("Ecco la tua lista:");
+        this.bookList.forEach(System.out::println);
     }
 }

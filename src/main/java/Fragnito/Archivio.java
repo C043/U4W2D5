@@ -114,6 +114,23 @@ public class Archivio {
         this.bookList.forEach(System.out::println);
     }
 
+    public void logInImport(String path) throws IOException {
+        File file = new File(path);
+        String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+        String[] booksToString = content.split("#");
+
+        for (String book : booksToString) {
+            String[] bookParts = book.split("@");
+            if (bookParts.length == 5) {
+                Rivista rivista = new Rivista(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), Integer.parseInt(bookParts[4]), Periodicita.valueOf(bookParts[3]));
+                this.bookList.add(rivista);
+            } else if (bookParts.length == 6) {
+                Libro libro = new Libro(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), Integer.parseInt(bookParts[5]), bookParts[3], Genre.valueOf(bookParts[4]));
+                this.bookList.add(libro);
+            }
+        }
+    }
+
     public void printList() {
         if (this.bookList.isEmpty()) {
             System.out.println("Nessun libro da mostrare, aggiungine uno prima!");

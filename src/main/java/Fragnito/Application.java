@@ -22,6 +22,14 @@ public class Application {
 
         System.out.println("Benvenuto su GoodReads!");
         System.out.println("\"" + f.harryPotter().quote() + "\"");
+
+        try {
+            bookList.logInImport("src/bookList.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         System.out.println("Cosa vuoi fare?");
 
         int input = 100;

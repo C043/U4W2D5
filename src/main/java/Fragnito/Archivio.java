@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Archivio {
-    private final List<Leggibile> bookList = new ArrayList<>();
+    private final Set<Leggibile> bookList = new HashSet<>();
 
     public void addBook(Leggibile book) {
         this.bookList.add(book);
@@ -23,8 +23,9 @@ public class Archivio {
         if (bookToRemove.isPresent()) {
             this.bookList.remove(bookToRemove.get());
             System.out.println(bookToRemove.get().getTitle() + " rimosso con successo!");
-            System.out.println("Ecco la lista aggiornata:");
-            this.bookList.forEach(System.out::println);
+            printList();
+        } else if (this.bookList.isEmpty()) {
+            System.out.println("La tua lista è vuota!");
         } else System.out.println("Nessun libro con quel codice!");
     }
 
@@ -44,16 +45,18 @@ public class Archivio {
         } else System.out.println("Nessun libro nella tua lista pubblicato quell'anno.");
     }
 
-    public void authorSearch(String author) throws RuntimeException {
+    public void authorSearch(String author) {
         List<Leggibile> booksFound = this.bookList.stream().filter(book -> {
             if (book instanceof Libro) {
                 return Objects.equals(((Libro) book).getAuthor(), author);
             } else return false;
         }).toList();
 
-        if (booksFound.getFirst() != null) {
+        if (!booksFound.isEmpty()) {
             System.out.println("Risultati ricerca per autore: " + author);
             booksFound.forEach(System.out::println);
+        } else if (this.bookList.isEmpty()) {
+            System.out.println("La lista è vuota, aggiungi un libro prima!");
         } else System.out.println("Nessun libro scritto dall'autore cercato nella tua lista.");
     }
 
@@ -99,13 +102,17 @@ public class Archivio {
                 Libro libro = new Libro(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), bookParts[3], Genre.valueOf(bookParts[4]));
                 this.bookList.add(libro);
             }
-            System.out.println("Lista libri importata con successo!");
         }
+        System.out.println("Lista libri importata con successo!");
         this.bookList.forEach(System.out::println);
     }
 
     public void printList() {
-        System.out.println("Ecco la tua lista:");
-        this.bookList.forEach(System.out::println);
+        if (this.bookList.isEmpty()) {
+            System.out.println("Nessun libro da mostrare, aggiungine uno prima!");
+        } else {
+            System.out.println("Ecco la tua lista aggiornata:");
+            this.bookList.forEach(System.out::println);
+        }
     }
 }

@@ -22,7 +22,8 @@ public class Application {
         try {
             bookList.logInImport("src/bookList.txt");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Nessun backup.");
+            ;
         }
 
         int lastIsbn = bookList.getLastIsbn();
@@ -178,6 +179,7 @@ public class Application {
                     break;
                 }
                 case 0: {
+                    bookList.saveListOnDisk();
                     System.out.println("See you space cowboy...");
                     break;
                 }

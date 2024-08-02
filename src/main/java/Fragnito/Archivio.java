@@ -82,7 +82,7 @@ public class Archivio {
 
         try {
             FileUtils.write(file, textToWrite, StandardCharsets.UTF_8);
-            System.out.println("Lista libri esportata con successo!");
+            System.out.println("Lista libri salvata con successo!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

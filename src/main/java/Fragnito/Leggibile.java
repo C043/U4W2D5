@@ -8,9 +8,9 @@ public abstract class Leggibile {
     protected int year;
     protected int numOfPages;
 
-    public Leggibile(String title) {
+    public Leggibile(String title, int isbnCode) {
         Random rand = new Random();
-        this.isbnCode = rand.nextInt(1000, 10000);
+        this.isbnCode = isbnCode;
         this.title = title;
         this.year = rand.nextInt(1990, 2024);
         this.numOfPages = rand.nextInt(100, 1000);

@@ -4,8 +4,8 @@ public class Libro extends Leggibile {
     private final String author;
     private final Genre genre;
 
-    public Libro(String title, String author, Genre genre) {
-        super(title);
+    public Libro(String title, int isbnCode, String author, Genre genre) {
+        super(title, isbnCode);
         this.author = author;
         this.genre = genre;
     }

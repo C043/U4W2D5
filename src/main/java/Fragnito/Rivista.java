@@ -1,7 +1,7 @@
 package Fragnito;
 
 public class Rivista extends Leggibile {
-    private Periodicita periodicita;
+    private final Periodicita periodicita;
 
     public Rivista(String title, Periodicita periodicita) {
         super(title);

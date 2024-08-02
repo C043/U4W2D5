@@ -2,9 +2,9 @@ package Fragnito;
 
 public class Libro extends Leggibile {
     private final String author;
-    private final String genre;
+    private final Genre genre;
 
-    public Libro(String title, String author, String genre) {
+    public Libro(String title, String author, Genre genre) {
         super(title);
         this.author = author;
         this.genre = genre;
@@ -14,7 +14,7 @@ public class Libro extends Leggibile {
         return author;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 

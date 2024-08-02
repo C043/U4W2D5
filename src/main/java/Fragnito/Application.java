@@ -165,8 +165,12 @@ public class Application {
                     }
                     break;
                 }
-                default: {
+                case 0: {
                     System.out.println("See you space cowboy...");
+                    break;
+                }
+                default: {
+                    System.out.println("Opzione non valida");
                     break;
                 }
             }

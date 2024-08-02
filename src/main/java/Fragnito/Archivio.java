@@ -97,10 +97,17 @@ public class Archivio {
             String[] bookParts = book.split("@");
             if (bookParts.length == 5) {
                 Rivista rivista = new Rivista(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), Integer.parseInt(bookParts[4]), Periodicita.valueOf(bookParts[3]));
-                this.bookList.add(rivista);
+                Leggibile comp = this.bookList.stream().filter(b -> b.getIsbnCode() == rivista.getIsbnCode()).toList().getFirst();
+                if (comp.equals(rivista)) {
+                    System.out.println(comp.getTitle() + " già presente.");
+                } else this.bookList.add(rivista);
+
             } else if (bookParts.length == 6) {
                 Libro libro = new Libro(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), Integer.parseInt(bookParts[5]), bookParts[3], Genre.valueOf(bookParts[4]));
-                this.bookList.add(libro);
+                Leggibile comp = this.bookList.stream().filter(b -> b.getIsbnCode() == libro.getIsbnCode()).toList().getFirst();
+                if (comp.equals(libro)) {
+                    System.out.println(comp.getTitle() + " già presente.");
+                } else this.bookList.add(libro);
             }
         }
         System.out.println("Lista libri importata con successo!");

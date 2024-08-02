@@ -1,5 +1,7 @@
 package Fragnito;
 
+import java.util.Objects;
+
 public abstract class Leggibile {
     protected int isbnCode;
     protected String title;
@@ -27,5 +29,13 @@ public abstract class Leggibile {
 
     public int getNumOfPages() {
         return numOfPages;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Leggibile leggibile = (Leggibile) o;
+        return isbnCode == leggibile.isbnCode && year == leggibile.year && numOfPages == leggibile.numOfPages && Objects.equals(title, leggibile.title);
     }
 }

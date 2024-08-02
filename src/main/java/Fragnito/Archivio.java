@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Archivio {
-    private final Set<Leggibile> bookList = new HashSet<>();
+    private final List<Leggibile> bookList = new ArrayList<>();
 
     public void addBook(Leggibile book) {
         this.bookList.add(book);
@@ -96,10 +96,10 @@ public class Archivio {
         for (String book : booksToString) {
             String[] bookParts = book.split("@");
             if (bookParts.length == 5) {
-                Rivista rivista = new Rivista(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), Periodicita.valueOf(bookParts[3]));
+                Rivista rivista = new Rivista(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), Integer.parseInt(bookParts[4]), Periodicita.valueOf(bookParts[3]));
                 this.bookList.add(rivista);
             } else if (bookParts.length == 6) {
-                Libro libro = new Libro(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), bookParts[3], Genre.valueOf(bookParts[4]));
+                Libro libro = new Libro(bookParts[0], Integer.parseInt(bookParts[1]), Integer.parseInt(bookParts[2]), Integer.parseInt(bookParts[5]), bookParts[3], Genre.valueOf(bookParts[4]));
                 this.bookList.add(libro);
             }
         }

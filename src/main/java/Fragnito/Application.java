@@ -3,11 +3,13 @@ package Fragnito;
 import com.github.javafaker.Faker;
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
 public class Application {
     public static void main(String[] args) {
+        Random rand = new Random();
         Scanner scanner = new Scanner(System.in);
         Faker f = new Faker();
         final int[] isbn = {1000};
@@ -72,7 +74,7 @@ public class Application {
                                 System.out.println("Inserisci l'anno di pubblicazione.");
                                 try {
                                     int year = Integer.parseInt(scanner.nextLine());
-                                    Libro libro = new Libro(title, isbnGen.get(), year, f.funnyName().name(), Genre.randomGenre());
+                                    Libro libro = new Libro(title, isbnGen.get(), year, rand.nextInt(100, 500), f.funnyName().name(), Genre.randomGenre());
                                     bookList.addBook(libro);
                                     System.out.println("Ora cosa vuoi fare?");
                                 } catch (Exception e) {
@@ -91,7 +93,7 @@ public class Application {
                                 System.out.println("Inserisci l'anno di pubblicazione.");
                                 try {
                                     int year = Integer.parseInt(scanner.nextLine());
-                                    Rivista rivista = new Rivista(title, isbnGen.get(), year, Periodicita.randomPeriodicita());
+                                    Rivista rivista = new Rivista(title, isbnGen.get(), year, rand.nextInt(100, 500), Periodicita.randomPeriodicita());
                                     bookList.addBook(rivista);
                                     System.out.println("Cosa vuoi fare ora?");
                                 } catch (Exception e) {
